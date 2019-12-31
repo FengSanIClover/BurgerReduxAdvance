@@ -16,6 +16,7 @@ export const removeIngredient = (name) => {
 }
 
 export const setIngredients = (ingredients) => {
+    console.log(`[setingredient]`)
     return {
         type: actionTypes.SET_INGREDIENTS,
         ingredients: ingredients
@@ -30,12 +31,12 @@ export const fetchIngredientError = () => {
 
 export const initIngredients = () => {
     return dispatch => {
-        axios.get('https://react-my-burger.firebaseio.com/ingredients.json')
+        axios.get('/ingredients.json')
             .then(response => {
                 dispatch(setIngredients(response.data))
             })
             .catch(error => {
-
+                dispatch(fetchIngredientError())
             });
     }
 }
